@@ -1,0 +1,202 @@
+// RumahHitung — data contoh Keluarga Santoso, November 2026.
+//
+// Satu sumber kebenaran: semua total di situs DIHITUNG dari transaksi di
+// bawah ini (lihat state.js). Tidak ada total yang ditulis tangan di tempat
+// lain, jadi angka dasbor, anggaran, dan laporan tidak mungkin berbeda.
+//
+// Keluarga: Andi (gaji Rp 6.500.000) + Ratna (gaji Rp 3.250.000),
+// anak Dina (9) dan Budi (6). Pemasukan Rp 9.750.000/bulan.
+// Anggaran total Rp 8.730.000; belum dibagikan Rp 1.020.000.
+// Terpakai Rp 8.979.100 — kelebihan belanja Rp 249.100, ditanggung dari
+// yang belum dibagikan, jadi sisa kas Rp 770.900.
+
+export const SEED = {
+  family: {
+    name: "Keluarga Santoso",
+    month: "November 2026",
+    monthShort: "Nov 2026",
+    members: [
+      { name: "Andi Santoso", role: "Ayah", income: 6500000 },
+      { name: "Ratna Santoso", role: "Ibu", income: 3250000 },
+      { name: "Dina Santoso", role: "Anak, 9 tahun", income: 0 },
+      { name: "Budi Santoso", role: "Anak, 6 tahun", income: 0 },
+    ],
+    payday: 1,
+  },
+  income: 9750000,
+
+  // 18 amplop: 8 kebutuhan, 6 keinginan, 4 tabungan & utang.
+  categories: [
+    { id: "sewa", group: "needs", name: "Sewa Rumah", budgeted: 2200000 },
+    { id: "belanja", group: "needs", name: "Belanja Harian", budgeted: 1400000 },
+    { id: "listrik", group: "needs", name: "Listrik & Air", budgeted: 380000 },
+    { id: "transport", group: "needs", name: "Transport", budgeted: 450000 },
+    { id: "internet", group: "needs", name: "Internet & HP", budgeted: 300000 },
+    { id: "sekolah", group: "needs", name: "Sekolah Anak", budgeted: 450000 },
+    { id: "asuransi", group: "needs", name: "Asuransi Kesehatan", budgeted: 250000 },
+    { id: "kesehatan", group: "needs", name: "Kesehatan & Obat", budgeted: 120000 },
+    { id: "makan", group: "wants", name: "Makan di Luar", budgeted: 450000 },
+    { id: "hiburan", group: "wants", name: "Hiburan & Streaming", budgeted: 250000 },
+    { id: "pakaian", group: "wants", name: "Pakaian", budgeted: 200000 },
+    { id: "jajan", group: "wants", name: "Jajan & Kopi", budgeted: 180000 },
+    { id: "liburan", group: "wants", name: "Tabungan Liburan", budgeted: 300000 },
+    { id: "hobi", group: "wants", name: "Hobi & Olahraga", budgeted: 150000 },
+    { id: "darurat", group: "save", name: "Dana Darurat", budgeted: 600000 },
+    { id: "dprumah", group: "save", name: "Tabungan DP Rumah", budgeted: 400000 },
+    { id: "motor", group: "save", name: "Cicilan Motor (extra)", budgeted: 350000 },
+    { id: "investasi", group: "save", name: "Investasi", budgeted: 300000 },
+  ],
+
+  // 96 transaksi: [tanggal, penjual/keterangan, kategori, rupiah].
+  transactions: [
+    [1, "Sewa rumah — Pak Harun", "sewa", 2200000],
+    [1, "Transfer — dana darurat", "darurat", 300000],
+    [1, "Transfer — tabungan DP rumah", "dprumah", 400000],
+    [2, "Bensin Pertalite", "transport", 50000],
+    [2, "Warung Padang Sederhana", "makan", 42000],
+    [2, "Kopi susu — Andi", "jajan", 12000],
+    [3, "Pasar Minggu — sayur & buah", "belanja", 98500],
+    [3, "Bakso Pak Kumis", "makan", 38500],
+    [3, "Es teh & gorengan", "jajan", 15000],
+    [3, "Transfer — tabungan liburan", "liburan", 150000],
+    [4, "Super Indo — mingguan", "belanja", 112000],
+    [4, "Ojek online — sekolah", "transport", 45000],
+    [4, "Kopi — warung", "jajan", 10000],
+    [5, "Warung Bu Tini — beras 5 kg", "belanja", 76400],
+    [5, "PLN — token listrik", "listrik", 185000],
+    [5, "PDAM — air", "listrik", 132000],
+    [5, "Jajan anak — kantin", "jajan", 18000],
+    [5, "Reksa dana — auto-debit", "investasi", 150000],
+    [6, "Ayam Geprek — 4 porsi", "makan", 54000],
+    [6, "Bensin Pertalite", "transport", 60000],
+    [6, "Kaos anak — Pasar Senen", "pakaian", 85000],
+    [6, "Kopi susu — Andi", "jajan", 14000],
+    [7, "Pasar Minggu — ayam & telur", "belanja", 88900],
+    [7, "Soto Betawi — makan siang", "makan", 47500],
+    [7, "Bulu tangkis — sewa lapangan", "hobi", 60000],
+    [8, "Super Indo — susu & roti", "belanja", 95400],
+    [8, "Apotek Sehat — obat batuk", "kesehatan", 54000],
+    [8, "Es kopi — siang", "jajan", 11000],
+    [9, "Warung Bu Tini — minyak & gula", "belanja", 67800],
+    [9, "Pizza — antar ke rumah", "makan", 62000],
+    [9, "Parkir & tol", "transport", 38000],
+    [10, "Pasar Minggu — ikan & tempe", "belanja", 102300],
+    [10, "IndiHome", "internet", 275000],
+    [10, "BPJS Kesehatan — 4 jiwa", "asuransi", 250000],
+    [10, "Jajan anak — kantin", "jajan", 16000],
+    [11, "Nasi Goreng Kambing", "makan", 41000],
+    [11, "Bensin Pertalite", "transport", 52000],
+    [12, "Super Indo — sabun & deterjen", "belanja", 84500],
+    [12, "SPP SD Pelita — Dina", "sekolah", 350000],
+    [12, "Pulsa — Andi", "internet", 25000],
+    [12, "Kopi — warung", "jajan", 9000],
+    [13, "Resto keluarga — ulang tahun Budi", "makan", 58000],
+    [13, "Ojek online — pasar", "transport", 47000],
+    [14, "Pasar Minggu — sayur & buah", "belanja", 78900],
+    [14, "Mie Ayam — 4 mangkuk", "makan", 39000],
+    [14, "Benang & kain — Ratna", "hobi", 45000],
+    [14, "Es teh manis", "jajan", 13000],
+    [15, "Warung Bu Tini — beras & telur", "belanja", 91600],
+    [15, "Transfer — dana darurat", "darurat", 300000],
+    [15, "Cicilan motor — bayar extra", "motor", 350000],
+    [15, "Buku & alat tulis", "sekolah", 68500],
+    [15, "Jajan anak — kantin", "jajan", 17000],
+    [16, "Sate Ayam — malam minggu", "makan", 46000],
+    [16, "Bensin Pertalite", "transport", 55000],
+    [16, "Celana kerja — Andi", "pakaian", 95000],
+    [17, "Super Indo — mingguan", "belanja", 73400],
+    [17, "Transfer — tabungan liburan", "liburan", 150000],
+    [17, "Kopi susu — Andi", "jajan", 12000],
+    [18, "Pasar Minggu — daging & ayam", "belanja", 88100],
+    [18, "KFC — paket keluarga", "makan", 52000],
+    [18, "Spotify — keluarga", "hiburan", 54900],
+    [19, "Puskesmas — obat & vitamin", "kesehatan", 32000],
+    [19, "Parkir mal", "transport", 42000],
+    [19, "Gorengan — sore", "jajan", 8000],
+    [20, "Warung Bu Tini — bumbu & santan", "belanja", 96700],
+    [20, "Warung Tegal — makan siang", "makan", 44000],
+    [20, "Seragam olahraga — Budi", "sekolah", 31500],
+    [20, "Reksa dana — auto-debit", "investasi", 150000],
+    [21, "Super Indo — buah & yoghurt", "belanja", 71200],
+    [21, "Bioskop — 2 tiket", "hiburan", 110000],
+    [21, "Kopi — warung", "jajan", 15000],
+    [22, "Ramen — Dina & Budi", "makan", 61000],
+    [22, "Bensin Pertalite", "transport", 48000],
+    [22, "Buku resep — Ratna", "hobi", 35000],
+    [23, "Pasar Minggu — cabai & bawang", "belanja", 42000],
+    [23, "Jajan anak — kantin", "jajan", 10000],
+    [24, "Warung Bu Tini — gula 1 kg", "belanja", 38500],
+    [24, "Bakmi Jawa", "makan", 49000],
+    [24, "Apotek Sehat — vitamin", "kesehatan", 29000],
+    [25, "Super Indo — telur 1 kg", "belanja", 44900],
+    [25, "Ayam Geprek — lembur", "makan", 38000],
+    [25, "Rental film — malam minggu", "hiburan", 28000],
+    [25, "Es kopi — siang", "jajan", 9000],
+    [26, "Pasar Minggu — tempe & tahu", "belanja", 36800],
+    [26, "Warung Bu Tini — bawang & cabai", "belanja", 2800],
+    [26, "Pasar Minggu — tahu tempe", "belanja", 3000],
+    [26, "Warung Bu Tini — sayur sop", "belanja", 2900],
+    [26, "Pasar Minggu — telur 1/2 kg", "belanja", 3100],
+    [26, "PLN — token top-up", "listrik", 58000],
+    [26, "Parkir", "transport", 12000],
+    [26, "Soto Ayam — makan siang", "makan", 41000],
+    [26, "Martabak — malam", "makan", 36000],
+    [26, "Kaos kaki & daleman", "pakaian", 18000],
+    [26, "Gorengan — sore", "jajan", 8000],
+    [26, "Shuttlecock", "hobi", 9000],
+    [26, "Plester & minyak kayu putih", "kesehatan", 4500],
+  ],
+
+  // 14 tagihan bulanan: tanggal jatuh tempo, jumlah, sudah dibayar atau belum.
+  // Yang lunas punya transaksi yang cocok; yang belum tidak punya transaksi.
+  bills: [
+    { name: "Sewa Rumah", amount: 2200000, day: 1, paid: true, note: "Transfer ke Pak Harun" },
+    { name: "Tabungan DP Rumah", amount: 400000, day: 1, paid: true, note: "Auto-debit rekening bersama" },
+    { name: "Listrik PLN", amount: 185000, day: 5, paid: true, note: "Token" },
+    { name: "Air PDAM", amount: 132000, day: 5, paid: true, note: "Tagihan bulanan" },
+    { name: "Gym & bulu tangkis", amount: 60000, day: 7, paid: true, note: "Sewa lapangan" },
+    { name: "Internet IndiHome", amount: 275000, day: 10, paid: true, note: "Paket 50 Mbps" },
+    { name: "BPJS Kesehatan", amount: 250000, day: 10, paid: true, note: "4 jiwa" },
+    { name: "SPP SD Pelita", amount: 350000, day: 12, paid: true, note: "Dina, kelas 3" },
+    { name: "Cicilan Motor", amount: 350000, day: 15, paid: true, note: "Angsuran ke-14 dari 35" },
+    { name: "Dana Darurat", amount: 300000, day: 15, paid: true, note: "Auto-debit" },
+    { name: "Spotify Keluarga", amount: 54900, day: 18, paid: true, note: "Langganan bulanan" },
+    { name: "Reksa Dana", amount: 150000, day: 20, paid: true, note: "Auto-debit" },
+    { name: "Iuran RT", amount: 50000, day: 25, paid: false, note: "Keamanan & kebersihan" },
+    { name: "Netflix", amount: 54000, day: 28, paid: false, note: "Langganan bulanan" },
+  ],
+
+  // 7 tujuan: target, sudah terkumpul, setoran per bulan.
+  // Total setoran Rp 1.650.000/bulan = persis anggaran tabungan.
+  goals: [
+    { name: "Dana Darurat", target: 15000000, saved: 6400000, monthly: 600000, note: "3 bulan pemasukan, untuk keadaan darurat" },
+    { name: "DP Rumah", target: 50000000, saved: 12500000, monthly: 400000, note: "Rumah sendiri, target 2030" },
+    { name: "Liburan Keluarga", target: 6000000, saved: 4200000, monthly: 150000, note: "Yogyakarta, libur sekolah Juni" },
+    { name: "Laptop Anak", target: 5000000, saved: 3100000, monthly: 100000, note: "Untuk Dina belajar coding" },
+    { name: "Motor Baru", target: 12000000, saved: 5400000, monthly: 200000, note: "Ganti motor lama yang sudah 9 tahun" },
+    { name: "Kurban", target: 3500000, saved: 2800000, monthly: 50000, note: "Iduladha tahun depan" },
+    { name: "Pendidikan Anak", target: 12000000, saved: 7900000, monthly: 150000, note: "Tabungan pendidikan Dina & Budi" },
+  ],
+
+  // 3 utang. Bayar minimum total Rp 860.000/bulan + Rp 140.000 extra
+  // dari yang belum dibagikan = Rp 1.000.000/bulan untuk melunasi.
+  debts: [
+    { name: "Kartu Kredit", balance: 4200000, rate: 0.18, minPayment: 210000, note: "Bunga 18%/tahun — paling mahal" },
+    { name: "Cicilan Motor", balance: 8400000, rate: 0.09, minPayment: 350000, note: "Sisa 24 bulan, bunga 9%/tahun" },
+    { name: "Pinjaman Koperasi", balance: 3600000, rate: 0.12, minPayment: 300000, note: "Bunga 12%/tahun — paling kecil saldonya" },
+  ],
+  debtMonthly: 1000000,
+
+  // 6 bulan terakhir: pengeluaran per bulan (November dihitung dari transaksi).
+  // needs/wants/save = pembagian pengeluaran bulan itu (jumlahnya = spent);
+  // dipakai pemilih bulan di dasbor. unpaid = tagihan belum dibayar saat
+  // bulan itu ditutup (Oktober lunas semua).
+  history: [
+    { month: "Jun 2026", spent: 7420000, needs: 4650000, wants: 1470000, save: 1300000 },
+    { month: "Jul 2026", spent: 7680000, needs: 4820000, wants: 1560000, save: 1300000 },
+    { month: "Agu 2026", spent: 7550000, needs: 4720000, wants: 1530000, save: 1300000 },
+    { month: "Sep 2026", spent: 7810000, needs: 4900000, wants: 1610000, save: 1300000 },
+    { month: "Okt 2026", spent: 7640000, needs: 4790000, wants: 1550000, save: 1300000, unpaid: 0 },
+    { month: "Nov 2026", spent: null },
+  ],
+};
